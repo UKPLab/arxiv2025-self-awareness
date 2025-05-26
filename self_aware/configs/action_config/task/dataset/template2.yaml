@@ -1,0 +1,88 @@
+path: ".runs/_1_data_scraper/TODO/wikidata_entities"
+name: template2
+entity_constr:
+  player:
+    - entity_name: playerLabel
+      question: "What is the place of birth for the <entity_type> <entity_name>?"
+      template: "The city of birth for the <entity_type> <entity_name> is"
+      relation: "The city of birth for the"
+      attribute: birthplaceLabel # city (str)
+    - entity_name: playerLabel
+      question: "What is the birth year of the <entity_type> <entity_name>?"
+      template: "The birth year of the <entity_type> <entity_name> is"
+      relation: "The birth year of the"
+      attribute: birthdate # year
+    - entity_name: playerLabel
+      question: "What is the position of the <entity_type> <entity_name>?"
+      template: "The position of the <entity_type> <entity_name> is"
+      relation: "The position of the"
+      attribute: positionLabel # position (str)
+    - entity_name: playerLabel
+      question: "What is the nationality of the <entity_type> <entity_name>?"
+      template: "The nationality of the <entity_type> <entity_name> is"
+      relation: "The nationality of the"
+      attribute: nationalityLabel # country (str)
+  movie:
+    - entity_name: movieLabel
+      question: "Who is the director of the <entity_type> <entity_name>?"
+      template: "The director of the <entity_type> <entity_name> is"
+      relation: "The director of the"
+      attribute: directorLabel # name (str)
+    - entity_name: movieLabel
+      question: "What is the release year of the <entity_type> <entity_name>?"
+      template: "The release year of the <entity_type> <entity_name> is"
+      relation: "The release year of the"
+      attribute: releaseDate # year
+    - entity_name: movieLabel
+      question: "What is the genre of the <entity_type> <entity_name>?"
+      template: "The genre of the <entity_type> <entity_name> is"
+      relation: "The genre of the"
+      attribute: genreLabel # name (str)
+    - entity_name: movieLabel
+      question: "What is the production country of the <entity_type> <entity_name>?"
+      template: "The production country of the <entity_type> <entity_name> is"
+      relation: "The production country of the"
+      attribute: countryLabel # country (str)
+  city:
+    - entity_name: cityLabel
+      question: "What is the country where the <entity_type> <entity_name> is located?"
+      template: "The country where the <entity_type> <entity_name> is located is"
+      relation: "The country where the"
+      attribute: countryLabel # name (str)
+    - entity_name: cityLabel
+      question: "What is the population of the <entity_type> <entity_name>?"
+      template: "The population of the <entity_type> <entity_name> is"
+      relation: "The population of the"
+      attribute: population # number
+    - entity_name: cityLabel
+      question: "What is the founding year of the <entity_type> <entity_name>?"
+      template: "The founding year of the <entity_type> <entity_name> is"
+      relation: "The founding year of the"
+      attribute: foundedDate # year
+    - entity_name: cityLabel
+      question: "What is the timezone of the <entity_type> <entity_name>?"
+      template: "The timezone of the <entity_type> <entity_name> is"
+      relation: "The timezone of the"
+      attribute: timezoneLabel # timezone (str)
+  song:
+    - entity_name: songLabel
+      question: "Who is the artist of the <entity_type> <entity_name>?"
+      template: "The artist of the <entity_type> <entity_name> is"
+      relation: "The artist of the"
+      attribute: artistLabel # name (str)
+    - entity_name: songLabel
+      question: "What is the album containing the <entity_type> <entity_name>?"
+      template: "The album containing the <entity_type> <entity_name> is"
+      relation: "The album containing the"
+      attribute: albumLabel # name (str)
+    - entity_name: songLabel
+      question: "What is the release year of the <entity_type> <entity_name>?"
+      template: "The release year of the <entity_type> <entity_name> is"
+      relation: "The release year of the"
+      attribute: releaseDate # year
+    - entity_name: songLabel
+      question: "What is the language of the lyrics in the <entity_type> <entity_name>?"
+      template: "The language of the lyrics in the <entity_type> <entity_name> is"
+      relation: "The language of the lyrics in the"
+      attribute: languageLabel # language (str)
+

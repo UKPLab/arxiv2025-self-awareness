@@ -1,0 +1,105 @@
+# @package _global_
+action_name: _4_comp_alt_latent_separation_score
+debug: false
+
+action_config:
+  experiment_name: SAE alternatives - Compare Latent Separation Score for SAE and SAE alternatives (sparse probe, linear probe, 2-layer probe)
+  device: cuda # auto, cuda, cpu (default)
+  seed: 73
+
+  task:
+    model:
+      type:
+        # ---sae_lense
+        _target_: transformer_lens.HookedTransformer.from_pretrained
+      name: google/gemma-2-2b
+      # name: google/gemma-2-9b
+
+    sae:
+      type:
+        # ---sae_lense
+        _target_: sae_lens.SAE.from_pretrained
+        # ---sparsify
+        # _target_: sparsify.Sae.load_many
+      release: gemma-scope-2b-pt-res-canonical
+      # release: gemma-scope-9b-pt-res-canonical
+
+      # skip every other layer
+      skip_layers: true
+      width: width_16k
+
+    # Replace the TODO witht the actual path you will get after action _6 execution
+    # google/gemma-2-2b
+    # template2_balanced_c4f58bc1
+    # sparse_prob:
+    #   type:
+    #     _target_: self_aware.utils.probes.SparseProbe
+    #   ckpt_dir: .runs/_6_prob_trainer/XXX/checkpoint
+    regressor_prob:
+      type:
+        _target_: self_aware.utils.probes.RegressorProbe
+      ckpt_dir: .runs/_6_prob_trainer/TODO/checkpoint
+    # nn_prob:
+    #   type:
+    #     _target_: self_aware.utils.probes.NNProbe
+    #   ckpt_dir: .runs/_6_prob_trainer/XXX/checkpoint
+
+    # Replace the TODO witht the actual path you will get after action _6 execution
+    # google/gemma-2-9b
+    # template2_balanced_c4f58bc1
+    # sparse_prob:
+    #   type:
+    #     _target_: self_aware.utils.probes.SparseProbe
+    #   ckpt_dir: .runs/_6_prob_trainer/XXX/checkpoint
+    # regressor_prob:
+    #   type:
+    #     _target_: self_aware.utils.probes.RegressorProbe
+    #   ckpt_dir: .runs/_6_prob_trainer/TODO/checkpoint
+    # nn_prob:
+    #   type:
+    #     _target_: self_aware.utils.probes.NNProbe
+    #   ckpt_dir: .runs/_6_prob_trainer/XXX/checkpoint
+
+    dataset:
+      type:
+        _target_: urartu.datasets.DatasetFromFile
+      # google/gemma-2-2b
+      data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      # google/gemma-2-9b
+      # data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      train_size: 0.7
+      file_extension: jsonl
+      dataloader:
+        input_key: "template"
+        output_key: "attribute"
+        batch_size: 32
+        shuffle: false
+
+    # plot top_k activations on each layer
+    top_k: 5
+
+    # cls_token_index: "entity_last"
+    cls_token_index: -1
+    # options:
+    #  entity_last: the last token of the entity as the cls
+    #  *any integer, e.g.:
+    #   -1: the last token of the prompt
+    #   -2: the token before the last token of the prompt
+
+    # --- disabling this as it's redundent for template2 ---
+    # ignore_of: false
+    # # !!! works with "cls_token_index: int"
+    # # we have these type of relations in the dataset:
+    # # 1 - "was born in the city of"
+    # # 2 - "was born in year"
+    # # trivially for 2nd sample the last token will be the "year" while for 1st sample the "of" instead of the "city".
+# hydra:
+#   sweeper:
+#     params:
+#       # action_config.task.top_k: 5,10
+#       # action_config.seed: 12,937,1286
+#       # action_config.task.dataset.data_files: .runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/0/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/2/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/3/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/4/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/5/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/6/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/7/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/8/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/9/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/10/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/11/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/12/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/13/dataset/dataset_type
+#       # action_config.task.dataset.data_files: .runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/0/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/2/dataset/dataset_type,.runs/_2_sample_constructor/mark_few_shot_mode_sweep_2025-02-16_17-08-02_multirun/3/dataset/dataset_type
+#       action_config.task.dataset.data_files: .runs/_2_sample_constructor/mark_small_kl_sweep2025-02-18_03-20-28_multirun/0/dataset/dataset_type,.runs/_2_sample_constructor/mark_small_kl_sweep2025-02-18_03-20-28_multirun/6/dataset/dataset_type,.runs/_2_sample_constructor/mark_small_kl_sweep2025-02-18_03-20-28_multirun/12/dataset/dataset_type, .runs/_2_sample_constructor/mark_small_kl_sweep2025-02-18_03-20-28_multirun/19/dataset/dataset_type

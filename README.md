@@ -1,116 +1,142 @@
-<p  align="center">
-  <img src='logo.png' width='200'>
+<!--- BADGES: START --->
+
+<!-- [![arXiv](https://img.shields.io/badge/arXiv-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/TODO) -->
+[![GitHub - License](https://img.shields.io/github/license/UKPLab/arxiv2025-self-awareness)](https://opensource.org/licenses/Apache-2.0)
+
+
+<!--- BADGES: END --->
+
+
+
+# Factual Self-Awareness in Language Models: Representation, Robustness, and Scaling
+
+This repository contains the code for reproducing the experiments from the paper "Factual Self-Awareness in Language Models: Representation, Robustness, and Scaling". The codebase is built on top of [Urartu](https://github.com/tamohannes/urartu), an open-source NLP framework that offers high-level wrappers for effortless experiment management, enhanced reproducibility, and flexible configuration. We recommend familiarizing yourself with Urartu's structure and capabilities before diving into this codebase.
+
+## More about Self-Awareness 🧠
+
+Factual incorrectness in generated content is one of the primary concerns in ubiquitous deployment of large language models (LLMs). Prior findings suggest LLMs can (sometimes) detect factual incorrectness in their generated content (i.e., fact-checking post-generation). In this work, we provide evidence supporting the presence of LLMs' 'internal compass' that dictate the correctness of factual recall at the time of generation.
+
+We demonstrate that for a given subject entity and a relation, LLMs internally encode linear features in the Transformer's residual stream that dictate whether it will be able to recall the correct attribute (that forms a valid entity-relation-attribute triplet). This self-awareness signal is robust to minor formatting variations. 
+
+We investigate the effects of context perturbation via different example selection strategies. Scaling experiments across model sizes and training dynamics highlight that self-awareness emerges rapidly during training and peaks in intermediate layers. These findings uncover intrinsic self-monitoring capabilities within LLMs, contributing to their interpretability and reliability.
+
+<p align="center">
+  <img width="350" alt="self-awareness-schema" src="https://github.com/user-attachments/files/20444939/teaser.pdf">
 </p>
 
-# arxiv2025_self_awareness
-[![Arxiv](https://img.shields.io/badge/Arxiv-YYMM.NNNNN-red?style=flat-square&logo=arxiv&logoColor=white)](https://put-here-your-paper.com)
-[![License](https://img.shields.io/github/license/UKPLab/arxiv2025-self-awareness)](https://opensource.org/licenses/Apache-2.0)
-[![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
-[![CI](https://github.com/UKPLab/arxiv2025-self-awareness/actions/workflows/main.yml/badge.svg)](https://github.com/UKPLab/arxiv2025-self-awareness/actions/workflows/main.yml)
+The Self-Awareness codebase is built upon the [Urartu framework](https://github.com/tamohannes/urartu) (v3). For detailed insights into its structure, please refer to the [Getting Started Guide](https://github.com/tamohannes/urartu/blob/main/starter_template_setup.md).
 
-This is the official template for new Python projects at UKP Lab. It was adapted for the needs of UKP Lab from the excellent [python-project-template](https://github.com/rochacbruno/python-project-template/) by [rochacbruno](https://github.com/rochacbruno).
+## Installation 🚀
 
-It should help you start your project and give you continuous status updates on the development through [GitHub Actions](https://docs.github.com/en/actions).
-
-> **Abstract:** The study of natural language processing (NLP) has gained increasing importance in recent years, with applications ranging from machine translation to sentiment analysis. Properly managing Python projects in this domain is of paramount importance to ensure reproducibility and facilitate collaboration. The template provides a structured starting point for projects and offers continuous status updates on development through GitHub Actions. Key features include a basic setup.py file for installation, packaging, and distribution, documentation structure using mkdocs, testing structure using pytest, code linting with pylint, and entry points for executing the program with basic CLI argument parsing. Additionally, the template incorporates continuous integration using GitHub Actions with jobs to check, lint, and test the project, ensuring robustness and reliability throughout the development process.
-
-Contact person: [Federico Tiblias](mailto:federico.tiblias@tu-darmstadt.de) 
-
-[UKP Lab](https://www.ukp.tu-darmstadt.de/) | [TU Darmstadt](https://www.tu-darmstadt.de/
-)
-
-Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions.
-
-
-## Getting Started
-
-> **DO NOT CLONE OR FORK**
-
-If you want to set up this template:
-
-1. Request a repository on UKP Lab's GitHub by following the standard procedure on the wiki. It will install the template directly. Alternatively, set it up in your personal GitHub account by clicking **[Use this template](https://github.com/rochacbruno/python-project-template/generate)**.
-2. Wait until the first run of CI finishes. Github Actions will commit to your new repo with a "✅ Ready to clone and code" message.
-3. Delete optional files: 
-    - If you don't need automatic documentation generation, you can delete folder `docs`, file `.github\workflows\docs.yml` and `mkdocs.yml`
-    - If you don't want automatic testing, you can delete folder `tests` and file `.github\workflows\tests.yml`
-    - If you do not wish to have a project page, delete folder `static` and files `.nojekyll`, `index.html`
-4. Prepare a virtual environment:
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install .
-pip install -r requirements-dev.txt # Only needed for development
-```
-5. Adapt anything else (for example this file) to your project. 
-
-6. Read the file [ABOUT_THIS_TEMPLATE.md](ABOUT_THIS_TEMPLATE.md)  for more information about development.
-
-## Usage
-
-### Using the classes
-
-To import classes/methods of `arxiv2025_self_awareness` from inside the package itself you can use relative imports: 
-
-```py
-from .base import BaseClass # Notice how I omit the package name
-
-BaseClass().something()
-```
-
-To import classes/methods from outside the package (e.g. when you want to use the package in some other project) you can instead refer to the package name:
-
-```py
-from arxiv2025_self_awareness import BaseClass # Notice how I omit the file name
-from arxiv2025_self_awareness.subpackage import SubPackageClass # Here it's necessary because it's a subpackage
-
-BaseClass().something()
-SubPackageClass().something()
-```
-
-### Using scripts
-
-This is how you can use `arxiv2025_self_awareness` from command line:
+Getting started with self-awareness is simple! Just follow these steps:
 
 ```bash
-$ python -m arxiv2025_self_awareness
+pip install -e .
 ```
 
-### Expected results
+## Experiment Pipeline 🔬
 
-After running the experiments, you should expect the following results:
+The experiments are organized in a sequential pipeline of actions, where each action builds upon the outputs of previous actions. Here's the step-by-step process:
 
-(Feel free to describe your expected results here...)
+1. **Data Collection** (`_1_data_scraper`):
+   - Scrapes and prepares the initial dataset
+   - Output is stored in `.runs/[current_date]/`
 
-### Parameter description
+2. **Sample Construction** (`_2_sample_constructor`):
+   - Uses the output from step 1 to construct known and forgotten samples
+   - Requires the output directory from step 1 as input
 
-* `x, --xxxx`: This parameter does something nice
+3. **Latent Separation Analysis** (`_3_latent_separation_score`):
+   - Analyzes latent space separation between known and forgotten samples
+   - Uses the output from step 2
 
-* ...
+4. **Comparative Analysis** (`_4_comp_alt_latent_separation_score`):
+   - Calculates latent separation scores for both Sparse Autoencoders (SAEs) and probing methods
+   - Compares the effectiveness of different approaches in separating known and forgotten samples
+   - Uses the output from step 2
 
-* `z, --zzzz`: This parameter does something even nicer
+5. **Probe Training** (`_5_prob_trainer`):
+   - Trains probe (e.g. linear) models on the constructed samples on each layer of the model
+   - Uses the output from step 2
 
-## Development
+6. **Scaling Laws** (`_6_scaling_laws`):
+   - Analyzes scaling properties across training checkpoints of a model
+   - Uses the output from step 2
 
-Read the FAQs in [ABOUT_THIS_TEMPLATE.md](ABOUT_THIS_TEMPLATE.md) to learn more about how this template works and where you should put your classes & methods. Make sure you've correctly installed `requirements-dev.txt` dependencies
+## Running Experiments 🧪
 
-## Cite
+Each action can be run using the `urartu` command with appropriate configuration. Here's an example command structure:
 
-Please use the following citation:
-
+```bash
+urartu action_config=<action_name> aim=aim slurm=<slurm_config> +action_config.task.model.api_token=YOUR_API_TOKEN
 ```
-@InProceedings{smith:20xx:CONFERENCE_TITLE,
-  author    = {Smith, John},
-  title     = {My Paper Title},
-  booktitle = {Proceedings of the 20XX Conference on XXXX},
-  month     = mmm,
-  year      = {20xx},
-  address   = {Gotham City, USA},
-  publisher = {Association for XXX},
-  pages     = {XXXX--XXXX},
-  url       = {http://xxxx.xxx}
+
+Where:
+- `<action_name>` is one of: `_1_data_scraper`, `_2_sample_constructor`, `_3_latent_separation_score`, `_4_comp_alt_latent_separation_score`, `_5_prob_trainer`, or `_6_scaling_laws`
+- `<slurm_config>` can be `slurm` for cluster execution or `no_slurm` for local execution
+
+### Example Commands
+
+1. Run data collection:
+```bash
+urartu action_config=_1_data_scraper aim=aim slurm=no_slurm +action_config.task.model.api_token=YOUR_API_TOKEN
+```
+
+2. Run sample construction:
+```bash
+urartu action_config=_2_sample_constructor aim=aim slurm=no_slurm +action_config.task.model.api_token=YOUR_API_TOKEN
+```
+
+3. Run subsequent experiments:
+```bash
+urartu action_config=_6_scaling_laws aim=aim slurm=no_slurm +action_config.task.model.api_token=YOUR_API_TOKEN
+```
+
+> **Note**: The input paths for each action can be specified either:
+> - In the corresponding YAML config file (recommended for reproducibility)
+> - Via command line arguments using the `+action_config.task.input_dir` parameter
+
+## Configuration ⚙️
+
+This project uses [Hydra](https://hydra.cc/) for configuration management. Each action has a corresponding configuration file in the `configs/action_config` directory with the same name as the action (e.g., `_1_data_scraper.yaml`). These configs can be modified to adjust experiment parameters.
+
+> **Note**: The configuration files contain TODO comments indicating where the output paths from previous actions should be specified. When running subsequent actions in the pipeline, make sure to update these paths with the actual output directories from the previous steps.
+
+Hydra allows for flexible configuration management through:
+- YAML configuration files
+- Command-line overrides using the `+` prefix
+- Configuration composition
+- Environment variable interpolation
+
+## Output Structure 📁
+
+All experiment outputs are stored in the `.runs` directory, organized by date. Each run creates a new directory with the format `.runs/YYYY-MM-DD/`. The output from each action should be used as input for subsequent actions in the pipeline.
+
+
+## Cite 📚
+
+If you use this code in your research, please cite our paper:
+
+```bibtex
+@article{self-awareness-2025,
+  title={Factual Self-Awareness in Language Models: Representation, Robustness, and Scaling},
+  author={[Authors]},
+  journal={[Journal/Conference]},
+  year={2025}
 }
 ```
 
-## Disclaimer
+## Contacts
 
-> This repository contains experimental software and is published for the sole purpose of giving additional background details on the respective publication. 
+[Hovhannes Tamoyan](mailto:hovhannes.tamoyan@tu-darmstadt.de)
+
+Please feel free to contact us if you have any questions or need to report any issues.
+
+
+## Links 🔗
+
+[Your Lab Homepage](https://example.com) | [Your Institution Website](https://example.edu)
+
+## Disclaimer ⚠️
+
+> This repository contains experimental software and is published for the sole purpose of giving additional background details on the respective publication.

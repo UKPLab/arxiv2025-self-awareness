@@ -1,0 +1,54 @@
+# @package _global_
+defaults:
+  # - /action_config/task/dataset/template1_def@action_config.task.dataset
+  # - /action_config/task/dataset/template1@action_config.task.dataset
+  # - /action_config/task/dataset/template1_cons_end@action_config.task.dataset
+  # - /action_config/task/dataset/template2@action_config.task.dataset
+  - /action_config/task/dataset/template2_balanced@action_config.task.dataset
+
+action_name: _2_sample_constructor
+debug: false
+
+action_config:
+  experiment_name: Construct wikidata samples
+  device: auto # auto, cuda, cpu (default)
+  seed: 73
+
+  task:
+    dataset:
+      entity_types:
+        - player
+        - movie
+        - city
+        - song
+
+      # Wether to build similar template: In which city was the player Jake Bornheimer born? The player Jake Bornheimer was born in the city of
+      # Otherwise use: The player Jake Bornheimer was born in the city of
+      questionable: false
+      # wether to have quotes on entity_name
+      quotes: false
+
+    model:
+      type:
+        _target_: urartu.models.ModelForCausalLM
+      name: google/gemma-2-2b
+      # name: google/gemma-2-9b
+      # name: EleutherAI/pythia-70m
+      # name: EleutherAI/pythia-1.4b
+      # name: EleutherAI/pythia-6.9b
+      # name: EleutherAI/pythia-12b
+
+      cache_dir: ""
+      dtype: torch.float32
+      k: 500
+      l: 0.3 # l * vocab_size
+      generate:
+        return_dict_in_generate: true
+        output_scores: true
+        # num_beams: 5
+
+hydra:
+  sweeper:
+    params:
+      action_config.task.model.k: 5,50,500,5000
+      action_config.task.model.l: 0.1,0.2,0.3,0.4

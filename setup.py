@@ -1,44 +1,35 @@
-"""Python setup.py for arxiv2025_self_awareness package"""
-import io
 import os
+from pathlib import Path
+
 from setuptools import find_packages, setup
 
+here = os.path.abspath(os.path.dirname(__file__))
 
-def read(*paths, **kwargs):
-    """Read the contents of a text file safely.
-    >>> read("arxiv2025_self_awareness", "VERSION")
-    '0.1.0'
-    >>> read("README.md")
-    ...
-    """
+version_file = os.path.join(here, "self_aware", "VERSION")
+with open(version_file) as vf:
+    __version__ = vf.read().strip()
 
-    content = ""
-    with io.open(
-        os.path.join(os.path.dirname(__file__), *paths),
-        encoding=kwargs.get("encoding", "utf8"),
-    ) as open_file:
-        content = open_file.read().strip()
-    return content
+# Requirements
+with open(os.path.join(here, "requirements.txt"), "r") as f:
+    requirements = f.read().splitlines()
 
-
-def read_requirements(path):
-    return [
-        line.strip()
-        for line in read(path).split("\n")
-        if not line.startswith(('"', "#", "-", "git+"))
-    ]
-
+# Package info
+NAME = "self_aware"
+DESCRIPTION = ""
+VERSION = __version__
+REQUIRES_PYTHON = ">=3.10.0"
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name="arxiv2025_self_awareness",
-    url="https://github.com/UKPLab/arxiv2025-self-awareness/",
-    long_description=read("README.md"),
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    long_description=long_description,
     long_description_content_type="text/markdown",
-    author="author_name",
-    packages=find_packages(exclude=["tests", ".github"]),
-    install_requires=read_requirements("requirements.txt"),
-    entry_points={
-        "console_scripts": ["arxiv2025_self_awareness = arxiv2025_self_awareness.__main__:main"]
-    },
-    extras_require={"test": read_requirements("requirements-dev.txt")},
+    python_requires=REQUIRES_PYTHON,
+    install_requires=requirements,
+    packages=find_packages("."),
+    package_dir={"": "."},
+    zip_safe=False,
 )

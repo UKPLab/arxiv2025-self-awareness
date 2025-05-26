@@ -1,0 +1,18 @@
+use_slurm: true
+name: "self_aware"
+constraint: ""
+timeout_min: 2000
+comment: "self_aware job"
+account: "athene-researcher"
+partition: "gpu-athene"
+nodelist: "remus,severus,rubeus"
+# account: "ukp-researcher"
+# partition: "gpu"
+# nodelist: "penelope,scratchy,moe,itchy,bob,melvin"
+mem: 160
+gpus_per_node: 2
+nodes: 1
+tasks_per_node: 1
+cpus_per_task: 2
+port_id: 40050
+additional_parameters: {}

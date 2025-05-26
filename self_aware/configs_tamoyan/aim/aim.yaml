@@ -1,0 +1,5 @@
+# repo: aim://10.167.11.14:51800
+use_aim: true
+repo: aim://130.83.167.67:53800
+# repo: ./
+log_system_params: true

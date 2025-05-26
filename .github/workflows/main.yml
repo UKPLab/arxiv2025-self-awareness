@@ -5,15 +5,14 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  
   check-files:
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +22,7 @@ jobs:
       - name: Check files
         run: |
           # Define the list of filenames you want to check
-          FILES_TO_CHECK=("LICENSE" "README.md" "requirements.txt" "requirements-dev.txt" "NOTICE.txt" "setup.py")
+          FILES_TO_CHECK=("LICENSE" "README.md" "requirements.txt" "requirements-dev.txt" "setup.py")
 
           # Initialize a variable to track missing files
           MISSING_FILES=()
@@ -56,9 +55,9 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v4
-        with: 
-          python-version: 3.9
-          
+        with:
+          python-version: '3.10'
+
       - name: Install dependencies
         run: |
           pip install -r requirements-dev.txt

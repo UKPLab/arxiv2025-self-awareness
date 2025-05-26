@@ -1,0 +1,67 @@
+path: ".runs/_1_data_scraper/TODO/wikidata_entities"
+name: template1_def
+entity_constr:
+  player:
+    - attribute: birthplaceLabel
+      entity_name: playerLabel
+      template: "The <entity_type> <entity_name> was born in the city of"
+      relation: was born in the city of
+    - attribute: birthdate
+      entity_name: playerLabel
+      template: "The <entity_type> <entity_name> was born in year"
+      relation: was born in year
+    - attribute: teamsPlayedLabel
+      entity_name: playerLabel
+      template: "The <entity_type> <entity_name> has played for team"
+      relation: has played for team
+  movie:
+    - attribute: directorLabel
+      entity_name: movieLabel
+      template: "The <entity_type> <entity_name> was directed by filmmaker"
+      relation: was directed by director
+    - attribute: releaseDate
+      entity_name: movieLabel
+      template: "The <entity_type> <entity_name> was released in year"
+      relation: was released in year
+    - attribute: duration
+      entity_name: movieLabel
+      template: "The <entity_type> <entity_name> has a duration of minutes"
+      relation: has a duration of minutes
+    - attribute: screenwriterLabel
+      entity_name: movieLabel
+      template: "The <entity_type> <entity_name> was written by screen writer"
+      relation: was written by screen writer
+    - attribute: genreLabel
+      entity_name: movieLabel
+      template: "The <entity_type> <entity_name> belongs to the genre of"
+      relation: belongs to the genre of
+    - attribute: castLabel
+      entity_name: movieLabel
+      template: "The <entity_type> <entity_name> features actor"
+      relation: features actor
+  city:
+    - attribute: countryLabel
+      entity_name: cityLabel
+      template: "The <entity_type> <entity_name> is located in country"
+      relation: is located in country
+    - attribute: coordinates
+      entity_name: cityLabel
+      template: "The <entity_type> <entity_name> is located at coordinates"
+      relation: is located at coordinates
+  song:
+    - attribute: artistLabel
+      entity_name: songLabel
+      template: "The <entity_type> <entity_name> is performed by artist"
+      relation: is performed by artist
+    - attribute: publicationYear
+      entity_name: songLabel
+      template: "The <entity_type> <entity_name> was released in year"
+      relation: was released in year
+    - attribute: genreLabel
+      entity_name: songLabel
+      template: "The <entity_type> <entity_name> is in the genre of"
+      relation: is in the genre of
+    - attribute: albumLabel
+      entity_name: songLabel
+      template: "The <entity_type> <entity_name> is from the album"
+      relation: is from the album

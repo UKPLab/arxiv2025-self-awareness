@@ -1,0 +1,20 @@
+# @package _global_
+action_name: _1_data_scraper
+debug: false
+
+action_config:
+  experiment_name: Wikidata Sample Generator
+  device: cuda # auto, cuda, cpu (default)
+  seed: 73
+
+  task:
+    dataset:
+      name: def
+      entity_types:
+        - player
+        - movie
+        - city
+        - song
+      num_entities: 1000
+      max_num_relations: 10
+      batch_size: 100

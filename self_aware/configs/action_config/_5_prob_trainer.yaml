@@ -1,0 +1,112 @@
+# @package _global_
+action_name: _5_prob_trainer
+debug: false
+
+action_config:
+  experiment_name: Linear Probing alternative Regressor (SAE alternative) training
+  device: cuda # auto, cuda, cpu (default)
+  seed: 73
+
+  task:
+    model:
+      type:
+        # ---sae_lense
+        _target_: transformer_lens.HookedTransformer.from_pretrained
+      name: google/gemma-2-2b
+      # name: google/gemma-2-9b
+      # name: EleutherAI/pythia-70m
+      # name: EleutherAI/pythia-1.4b
+      # name: EleutherAI/pythia-6.9b
+      # name: EleutherAI/pythia-12b
+
+    dataset:
+      type:
+        _target_: urartu.datasets.DatasetFromFile
+      # google/gemma-2-2b
+      data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      # google/gemma-2-9b
+      # data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      # EleutherAI/pythia-70m
+      # data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      # EleutherAI/pythia-1.4b
+      # data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      # EleutherAI/pythia-6.9b
+      # data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      # EleutherAI/pythia-12b
+      # data_files: .runs/_2_sample_constructor/TODO/template2_balanced_c4f58bc1/template2_balanced_c4f58bc1_type
+
+      train_size: 0.7
+      file_extension: jsonl
+      seed: ${action_config.seed}
+      dataloader:
+        input_key: "template"
+        output_key: "attribute"
+        batch_size: 16
+        shuffle: false
+
+    num_epochs: 3
+    save_every: 1
+    lr: 1e-4
+    weight_decay: 1e-5
+
+    # modif_subset: test
+
+    # quotation: single
+
+    # questioning: configs/action_config/task/dataset/template2_balanced.yaml
+
+    # few_shot: 3
+    # few_shot_entity_mode: only
+    # few_shot_relation_mode: unique
+
+    # prepend_text: The cat darted under the couch as the thunder cracked outside.
+
+    # probe:
+    #   type:
+    #     _target_: self_aware.utils.probes.SparseProbe
+    #   alpha: 0.8 # Strong L1 regularization for feature selection
+    #   beta: 0.1 # Lighter L1 regularization for classifier
+    #   non_linear: true
+    #   non_linearity: torch.sigmoid
+
+    probe:
+      type:
+        _target_: self_aware.utils.probes.RegressorProbe
+
+    # probe:
+    #   type:
+    #     _target_: self_aware.utils.probes.NNProbe
+    #   non_linearity: torch.sigmoid
+
+    use_amp: true
+    validation_interval: 1
+    gradient_accumulation_steps: 1
+
+    # cls_token_index: "entity_last"
+    cls_token_index: -1
+    # options:
+    #  entity_last: the last token of the entity as the cls
+    #  *any integer, e.g.:
+    #   -1: the last token of the prompt
+    #   -2: the token before the last token of the prompt
+
+    # --- disabling this as it's redundent for template2 ---
+    # ignore_of: false
+    # # !!! works with "cls_token_index: int"
+    # # we have these type of relations in the dataset:
+    # # 1 - "was born in the city of"
+    # # 2 - "was born in year"
+    # # trivially for 2nd sample the last token will be the "year" while for 1st sample the "of" instead of the "city".
+
+hydra:
+  sweeper:
+    params:
+      # gemma-2-2b
+      # action_config.task.dataset.data_files: ...
+      # pythia-12b
+      # action_config.task.dataset.data_files: ...
