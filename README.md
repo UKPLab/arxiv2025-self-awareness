@@ -20,6 +20,12 @@ We demonstrate that for a given subject entity and a relation, LLMs internally e
 
 We investigate the effects of context perturbation via different example selection strategies. Scaling experiments across model sizes and training dynamics highlight that self-awareness emerges rapidly during training and peaks in intermediate layers. These findings uncover intrinsic self-monitoring capabilities within LLMs, contributing to their interpretability and reliability.
 
+
+
+
+
+
+
 <p align="center">
   <img alt="self-awareness-schema" src="https://github.com/user-attachments/files/20444939/teaser.pdf">
 </p>
@@ -135,7 +141,7 @@ Please feel free to contact us if you have any questions or need to report any i
 
 ## Links 🔗
 
-[Your Lab Homepage](https://example.com) | [Your Institution Website](https://example.edu)
+[UKP Lab Homepage](https://www.ukp.tu-darmstadt.de/) | [TU Darmstadt Website](https://www.tu-darmstadt.de/index.en.jsp)
 
 ## Disclaimer ⚠️
 
