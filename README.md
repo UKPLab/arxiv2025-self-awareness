@@ -20,15 +20,7 @@ We demonstrate that for a given subject entity and a relation, LLMs internally e
 
 We investigate the effects of context perturbation via different example selection strategies. Scaling experiments across model sizes and training dynamics highlight that self-awareness emerges rapidly during training and peaks in intermediate layers. These findings uncover intrinsic self-monitoring capabilities within LLMs, contributing to their interpretability and reliability.
 
-
-
-
-
-
-
-<p align="center">
-  <img alt="self-awareness-schema" src="https://github.com/user-attachments/files/20444939/teaser.pdf">
-</p>
+![teaser](https://github.com/user-attachments/assets/7417edf1-aafd-4b7e-b1e2-500c4fa3c2aa)
 
 The Self-Awareness codebase is built upon the [Urartu framework](https://github.com/tamohannes/urartu) (v3). For detailed insights into its structure, please refer to the [Getting Started Guide](https://github.com/tamohannes/urartu/blob/main/starter_template_setup.md).
 
