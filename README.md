@@ -12,7 +12,7 @@
 
 This repository contains the code for reproducing the experiments from the paper "Factual Self-Awareness in Language Models: Representation, Robustness, and Scaling". The codebase is built on top of [Urartu](https://github.com/tamohannes/urartu), an open-source NLP framework that offers high-level wrappers for effortless experiment management, enhanced reproducibility, and flexible configuration. We recommend familiarizing yourself with Urartu's structure and capabilities before diving into this codebase.
 
-## More about Self-Awareness 🧠
+## More about Self-Awareness 🤔
 
 Factual incorrectness in generated content is one of the primary concerns in ubiquitous deployment of large language models (LLMs). Prior findings suggest LLMs can (sometimes) detect factual incorrectness in their generated content (i.e., fact-checking post-generation). In this work, we provide evidence supporting the presence of LLMs' 'internal compass' that dictate the correctness of factual recall at the time of generation.
 
