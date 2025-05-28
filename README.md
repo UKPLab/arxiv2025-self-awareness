@@ -1,7 +1,7 @@
 <!--- BADGES: START --->
 
 [![arXiv](https://img.shields.io/badge/arXiv-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.21399)
-[![GitHub - License](https://img.shields.io/github/license/UKPLab/arxiv2025-self-awareness)](https://opensource.org/licenses/Apache-2.0)
+[![GitHub - License](https://img.shields.io/github/license/UKPLab/arxiv2025-self-awareness)](https://opensource.org/licenses/Apache-2.0) 
 
 
 <!--- BADGES: END --->
