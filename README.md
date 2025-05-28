@@ -1,6 +1,6 @@
 <!--- BADGES: START --->
 
-<!-- [![arXiv](https://img.shields.io/badge/arXiv-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/TODO) -->
+[![arXiv](https://img.shields.io/badge/arXiv-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.21399)
 [![GitHub - License](https://img.shields.io/github/license/UKPLab/arxiv2025-self-awareness)](https://opensource.org/licenses/Apache-2.0)
 
 
@@ -115,12 +115,15 @@ All experiment outputs are stored in the `.runs` directory, organized by date. E
 
 If you use this code in your research, please cite our paper:
 
-```bibtex
-@article{self-awareness-2025,
-  title={Factual Self-Awareness in Language Models: Representation, Robustness, and Scaling},
-  author={[Authors]},
-  journal={[Journal/Conference]},
-  year={2025}
+```
+@misc{tamoyan2025factualselfawarenesslanguagemodels,
+      title={Factual Self-Awareness in Language Models: Representation, Robustness, and Scaling}, 
+      author={Hovhannes Tamoyan and Subhabrata Dutta and Iryna Gurevych},
+      year={2025},
+      eprint={2505.21399},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2505.21399}, 
 }
 ```
 
